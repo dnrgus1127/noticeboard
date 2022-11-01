@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ABC</title>
+    <link rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <div id="dashBoard">
+      <div id="sideBar" class="whiteTheme">
+        <div id="userInfo">
+          <div id="userImg">
+            <img src="assets/img/1992d0v2wvr88nx7wht6.jpg" alt="" srcset="" />
+          </div>
+          <div id="userText">
+            <p id="username">정욱현</p>
+            <input
+              id="changeName"
+              type="text"
+              name=""
+              id=""
+              placeholder="이름 입력"
+            />
+            <img
+              id="editIcon"
+              src="assets/img/iconmonstr-pencil-thin.svg"
+              alt=""
+            />
+            <p id="introduce">
+              HTML, CSS , Vanila JavaScript, React, Vue.js, Node.js, Computer
+              Security, Computer Science, Daegu Catholic Univercity, Flutter,
+              Tenserflow, C, C++, Java, Python
+            </p>
+          </div>
+        </div>
+        <div id="snb">
+          <ul>
+            <li class="snb-li snb-selected">
+              <p>포트폴리오</p>
+            </li>
+            <li class="snb-li"><p>코딩테스트</p></li>
+            <li class="snb-li"><p>알고리즘</p></li>
+            <li class="snb-li"><p>TIL</p></li>
+            <li class="snb-li">ETC</li>
+          </ul>
+        </div>
+        <div id="settingIcon">
+          <img src="assets/img/iconmonstr-gear-thin.svg" alt="" srcset="" />
+        </div>
+      </div>
+      <div id="contentsBar">
+        <div id="contents-wrap">
+          <div id="userBox">
+            <p>정욱현</p>
+          </div>
+          <div class="flex-layout wrap" style="justify-content: space-between">
+            <p class="menu-title">Attribute</p>
+            <img
+              id="btn-Att"
+              class="btn-write"
+              src="assets/img/iconmonstr-pen-5.svg"
+              alt=""
+            />
+          </div>
+
+          <ul class="menu-att">
+            <li>Fname</li>
+            <li>Mname</li>
+            <li>Age</li>
+            <li>Content</li>
+            <li>Etc</li>
+          </ul>
+          <div class="tupleBox">
+            <div class="tuple"></div>
+          </div>
+          <div class="flex-layout wrap" style="justify-content: space-between">
+            <p class="menu-title">Example</p>
+            <img
+              class="btn-write"
+              src="assets/img/iconmonstr-pen-5.svg"
+              alt=""
+              onclick="location.href = 'NewPost.html'"
+              id="btn-exam"
+            />
+          </div>
+
+          <ul class="menu-att">
+            <li>게시글</li>
+            <li>조회수</li>
+          </ul>
+          <div class="tupleBox">
+            <div class="tuple example">
+              <ul>
+                <li>
+                  그러니까 우린 아직 서로를 모를 사이 그럼왠지 우린 아직
+                  뭐시기기기기기기
+                </li>
+                <li>999</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="form-newContent">
+        <div id="form-wrap">
+          <p>New Infomation</p>
+          <div>
+            <form action="/" method="post" id="info-form">
+              <label for="input-Fname">Fname</label>
+              <input id="input-Fname" name="Fname" type="text" />
+              <label for="input-Mname">Mname</label>
+              <input id="input-Mname" name="Mname" type="text" />
+              <label for="input-Age">Age</label>
+              <input id="input-Age" name="Age" type="text" />
+              <label for="input-Content">Content</label>
+              <input id="input-Content" name="Content" type="text" />
+              <label for="input-Etc">Etc</label>
+              <input id="input-Etc" name="Etc" type="text" />
+              <input id="info-submit" type="submit" value="제출" />
+            </form>
+            <button id="btn-cancel">취소</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script type="module">
+    import { getParameterByName } from "./param.js";
+    console.log(getParameterByName("index"));
+  </script>
+
+  <script src="vanilla.js"></script>
+</html>

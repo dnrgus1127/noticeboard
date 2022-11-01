@@ -1,0 +1,298 @@
+/* 폰트  */
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap");
+
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap");
+
+/* 폰트  */
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: "Noto Sans KR", sans-serif;
+}
+
+ul,
+li {
+  list-style: none;
+}
+
+body {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+body::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera*/
+}
+
+.flex-layout {
+  display: flex;
+}
+
+#dashBoard {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  position: relative;
+}
+
+#sideBar {
+  width: 300px;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+#userInfo {
+  padding-top: 16px;
+}
+
+#userText {
+  text-align: center;
+  position: relative;
+}
+#userText img {
+  position: absolute;
+  top: 0;
+  right: 5px;
+  height: 16px;
+  cursor: pointer;
+}
+#userText img:hover {
+  opacity: 50%;
+}
+
+#userImg {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 150px;
+  height: 150px;
+  overflow: hidden;
+  border-radius: 75%;
+  margin: 0 auto;
+  margin-bottom: 8px;
+}
+
+#userImg img {
+  position: absolute;
+  height: 200px;
+  top: 0px;
+  right: -35px;
+}
+
+#username {
+  font-size: 28px;
+  font-weight: 550;
+  font-family: "Noto Sans KR", sans-serif;
+  margin-bottom: 16px;
+}
+
+.editIcon {
+  width: auto;
+  height: 100%;
+  color: wheat;
+  /* margin-top: 10px; */
+  margin-left: 5px;
+  align-items: flex-end;
+}
+
+#changeName {
+  height: 30px;
+  position: absolute;
+  top: 5px;
+  right: 40px;
+  width: 70%;
+  display: none;
+  /* border: none; */
+  /* outline: none; */
+  font-size: 28px;
+  font-family: "Noto Sans KR", sans-serif;
+  text-align: center;
+}
+
+#introduce {
+  margin: 16px;
+  padding: 12px;
+  /* width: 100%; */
+  text-align: start;
+  word-wrap: break-word;
+  border: 1px solid grey;
+  border-radius: 4%;
+  background-color: #f8ede3;
+}
+
+/* side navigation bar */
+#snb {
+  width: 100%;
+  margin-top: 24px;
+}
+#snb ul {
+  border-top: 1px solid #d0b8a8;
+}
+.snb-li {
+  height: 70px;
+  border-bottom: 1px solid #d0b8a8;
+  font-size: 24px;
+  color: white;
+  font-family: "Noto Sans KR", sans-serif;
+  display: flex;
+  padding: 0 16px;
+}
+.snb-li p {
+  margin: auto 0;
+}
+
+.snb-li:hover {
+  background-color: #dfd3c3;
+}
+
+.snb-selected {
+  background-color: #665a48;
+}
+
+#settingIcon {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding: 15px;
+}
+#settingIcon:hover {
+  opacity: 0.5;
+}
+
+/*  */
+#contentsBar {
+  position: relative;
+  top: 0;
+  left: 300px;
+  width: calc(100% - 300px);
+  height: 100%;
+  background-color: white;
+}
+
+#contents-wrap {
+  margin: 32px;
+  background-color: white;
+  width: calc(100% - 64px);
+  height: calc(100% - 64px);
+}
+
+.darkTheme {
+  background-color: black;
+  color: white;
+}
+
+.whiteTheme {
+  background-color: #9f8772;
+  color: black;
+}
+
+.menu-att {
+  margin: 12px 30px;
+  padding: 0 40px;
+  width: calc(100% - 60px);
+  height: 40px;
+  border-radius: 5px;
+  background-color: #9f8772;
+  border: 1px solid grey;
+  display: flex;
+  justify-content: space-between;
+}
+
+.menu-att li {
+  color: black;
+  margin: auto 15px;
+
+  align-items: center;
+}
+
+.menu-title {
+  font-size: 24px;
+}
+
+.tupleBox {
+  height: 250px;
+}
+
+.tupleBox {
+  margin: 0 30px;
+}
+
+.tuple ul {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  height: 40px;
+}
+
+.tuple ul li {
+  width: 19.5%;
+  text-align: end;
+  border-right: 1px solid rgb(183, 180, 180);
+  padding-right: 8px;
+  padding-bottom: 4px;
+  align-self: flex-end;
+  border-bottom: 1px solid rgb(183, 180, 180);
+}
+
+/* .tuple .story {
+  width: 80.5%;
+  text-align: start;
+} */
+
+.tuple.example ul li:nth-child(1) {
+  width: 80.5%;
+  text-align: start;
+}
+
+.tuple ul:hover {
+  background-color: lightgrey;
+}
+
+#userBox {
+  padding: 24px 30px;
+  display: flex;
+  justify-content: end;
+}
+
+#userBox p {
+  font-size: 24px;
+  color: black;
+}
+
+.wrap {
+  margin: 0 30px;
+}
+
+.btn-write:hover {
+  opacity: 0.5;
+  cursor: pointer;
+}
+
+#form-newContent {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  display: none;
+}
+
+#form-wrap {
+  position: absolute;
+  top: calc((100% - 600px) / 2);
+  left: calc((100% - 480px) / 2);
+  width: 480px;
+  height: 600px;
+  background-color: white;
+  border: 2px solid grey;
+  padding: 20px 16px;
+}
+
+input {
+  display: block;
+  width: 100%;
+  height: 32px;
+}
