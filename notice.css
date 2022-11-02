@@ -42,11 +42,12 @@ thead {
 
 td {
   padding: 0 8px;
-  height: 32px;
+  /* height: 32px; */
   font-size: 13px;
 }
 
 tr {
+  height: 33px;
   border-bottom: 1px solid rgba(128, 128, 128, 0.6);
 }
 tr:nth-last-child(1) {

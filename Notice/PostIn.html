@@ -15,24 +15,41 @@
         <div id="title-box">
           <div class="flex">
             <p class="tag">[태그]</p>
-            <h4 id="title">게시판 운영 정책 안내</h4>
+            <h4 id="title"></h4>
           </div>
           <div class="flex author">
             <p>작성자 : <span id="author">정욱현</span></p>
             <p>작성일 : <span id="date">2019-11-15</span></p>
             <p>조회수 : <span id="views">911</span></p>
+            <div id="left-box" class="flex">
+              <p>댓글 : <span id="comments">0</span></p>
+              <p style="border: none">
+                추천 : <span id="Recommendation">0</span>
+              </p>
+            </div>
           </div>
         </div>
         <div id="contents-box">
           <p id="contents">내용내용</p>
         </div>
+      </div>
+      <div id="container-comments">
         <div id="container-btn">
+          <button id="btn-rcmd">추천</button>
           <button id="btn-update">수정</button>
           <button id="btn-delete">삭제</button>
           <button id="btn-back">목록</button>
         </div>
+        <div id="wrap-comments"></div>
+        <div id="con-comment-write">
+          <label for="name">작성자</label>
+          <input type="text" name="name" id="comment-author" />
+          <textarea name="" id="comment-content" cols="30" rows="10"></textarea>
+          <button id="btn-write">댓글 작성</button>
+        </div>
       </div>
     </div>
   </body>
-  <script src="/PostIn.js"></script>
+  <script type="module" src="/PostIn.js"></script>
+  <script type="module" src="/comments.js"></script>
 </html>

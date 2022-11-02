@@ -1,14 +1,22 @@
-index = getParameterByName("index");
+import { Post } from "./Post.js";
+
+const index = getParameterByName("index");
 const tag = document.querySelectorAll(".tag");
+let load_data;
 let id;
 fetch(`http://localhost:3000/posts/${index}`)
   .then((response) => response.json())
   .then((data) => {
+    const { title, author, category, post, views, date, rcmd } = data;
+    load_data = new Post(title, author, category, post, views, date, rcmd);
+
     id = data.id;
-    document.getElementById("title").innerText = data.title;
-    document.getElementById("author").innerText = data.author;
-    document.getElementById("date").innerText = data.date;
-    document.getElementById("contents").innerText = data.post;
+    document.getElementById("title").innerText = load_data.title;
+    document.getElementById("author").innerText = load_data.author;
+    document.getElementById("date").innerText = load_data.date;
+    document.getElementById("views").innerText = load_data.views;
+    document.getElementById("contents").innerText = load_data.post;
+    document.getElementById("Recommendation").innerText = load_data.rcmd;
     for (let index = 0; index < tag.length; index++) {
       const element = tag[index];
       element.innerText = `[${data.category}]`;
@@ -63,3 +71,15 @@ function getParameterByName(name) {
     ? ""
     : decodeURIComponent(results[1].replace(/\+/g, " "));
 }
+
+document.getElementById("btn-rcmd").addEventListener("click", () => {
+  if (confirm("이 글을 추천 하시겠습니까?")) {
+    fetch(`http://localhost:3000/posts/${index}`, {
+      method: "PATCH",
+      body: JSON.stringify({ rcmd: load_data.rcmd + 1 }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then(location.reload());
+  }
+});

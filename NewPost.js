@@ -43,6 +43,9 @@ if (type == 1) {
   document.getElementById("btn-submit").addEventListener("click", () => {
     postData.category = ele_category.value;
     postData.post = ele_post.value;
+    if (ValidData(postData)) {
+      return;
+    }
     fetch(`http://localhost:3000/posts/${index}`, {
       method: "PATCH",
       body: JSON.stringify(postData),
@@ -57,6 +60,20 @@ if (type == 1) {
   });
 }
 
+function ValidData(post) {
+  let checkError =
+    !Valid_title(post.title) ||
+    !Valid_author(post.author) ||
+    post.category === "Error";
+
+  if (checkError) {
+    alert("입력값을 다시 확인해 주세요!");
+    return true;
+  } else {
+    return false;
+  }
+}
+
 // 유효성 검사 처리
 const submit_info = document.getElementById("form-write");
 submit_info.addEventListener("submit", function (evt) {
@@ -69,17 +86,11 @@ submit_info.addEventListener("submit", function (evt) {
     0,
     date_now
   );
-  console.log(newPost.category);
-  let checkError =
-    !Valid_title(evt.target.title.value) ||
-    !Valid_author(evt.target.author.value) ||
-    newPost.category === "Error";
 
-  if (checkError) {
-    alert("입력값을 다시 확인해 주세요!");
-    return;
-  }
   if (type != 1) {
+    if (ValidData(newPost)) {
+      return;
+    }
     fetch("http://localhost:3000/posts", {
       method: "POST",
       body: JSON.stringify(newPost),
@@ -198,9 +209,5 @@ function ValidCss(element, bool) {
 const ele_category = document.getElementById("category");
 
 document.getElementById("category").addEventListener("change", () => {
-  // if(ele_category.value === "error")
-  // {
-
-  // }
   ele_category.className = "shadow-green";
 });
