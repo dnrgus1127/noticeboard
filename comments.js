@@ -18,6 +18,8 @@ fetch(`http://localhost:3000/posts/${index}`)
     if (commentArr === undefined || commentArr.length === 0) {
       commentIsEmpty = true;
     }
+    document.getElementById("comments").innerText = `${commentArr.length}`
+
   });  
 class Comment {
   /**
@@ -32,6 +34,7 @@ class Comment {
     this.time = time;
   }
 }
+
 
 btnWrite.addEventListener("click", () => {
   const time = GetDate("min");
@@ -60,9 +63,10 @@ btnWrite.addEventListener("click", () => {
   });
 });
 
-setTimeout(renderComments, 1000);
+setTimeout(renderComments, 300);
 
 function renderComments() {
+
   const wrapContents = document.getElementById("wrap-comments");
   const fragmentPage = document.createDocumentFragment();
   if (commentIsEmpty) {
@@ -97,8 +101,9 @@ function renderComments() {
 
 function addEventDel() {
   const btnDels = document.querySelectorAll(".comment-del");
-  let tmp_Arr = [...commentArr];
   for (let i = 0; i < btnDels.length; i++) {
+    let tmp_Arr = [...commentArr];
+
     const element = btnDels[i];
     tmp_Arr.splice(i, i + 1);
     element.addEventListener("click", () => {
@@ -117,3 +122,4 @@ function addEventDel() {
     });
   }
 }
+

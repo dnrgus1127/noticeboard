@@ -55,7 +55,7 @@ if (type == 1) {
     });
     alert("수정 완료");
     setTimeout(() => {
-      location.href = "noticeBoard.html";
+      location.href = `./Notice/PostIn.html?index=${index}`;
     }, 500);
   });
 }
