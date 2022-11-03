@@ -11,12 +11,14 @@ let commentIsEmpty;
 fetch(`http://localhost:3000/posts/${index}`)
   .then((response) => response.json())
   .then((data) => {
+
     commentArr = data.comments;
+
+
     if (commentArr === undefined || commentArr.length === 0) {
       commentIsEmpty = true;
     }
-  });
-
+  });  
 class Comment {
   /**
    *
@@ -39,10 +41,12 @@ btnWrite.addEventListener("click", () => {
   if (!confirm("댓글을 작성하시겠습니까?")) {
     return;
   }
+  console.log(commentArr);
   if (commentArr === undefined || commentArr.length === 0) {
+    console.log("empty")
     commentArr = [newComment];
   } else {
-    commentArr = [...commentArr, newComment];
+    commentArr = [newComment,...commentArr];
   }
 
   fetch(`http://localhost:3000/posts/${index}`, {
@@ -56,7 +60,7 @@ btnWrite.addEventListener("click", () => {
   });
 });
 
-setTimeout(renderComments, 500);
+setTimeout(renderComments, 1000);
 
 function renderComments() {
   const wrapContents = document.getElementById("wrap-comments");
@@ -93,16 +97,17 @@ function renderComments() {
 
 function addEventDel() {
   const btnDels = document.querySelectorAll(".comment-del");
+  let tmp_Arr = [...commentArr];
   for (let i = 0; i < btnDels.length; i++) {
     const element = btnDels[i];
-    commentArr.splice(i, i + 1);
+    tmp_Arr.splice(i, i + 1);
     element.addEventListener("click", () => {
       if (!confirm("댓글을 삭제하시겠습니까?")) {
         return;
       }
       fetch(`http://localhost:3000/posts/${index}`, {
         method: "PATCH",
-        body: JSON.stringify({ comments: commentArr }),
+        body: JSON.stringify({ comments: tmp_Arr }),
         headers: {
           "Content-Type": "application/json",
         },

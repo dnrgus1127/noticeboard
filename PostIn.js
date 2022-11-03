@@ -73,10 +73,11 @@ function getParameterByName(name) {
 }
 
 document.getElementById("btn-rcmd").addEventListener("click", () => {
+  let rcmd_t = (load_data.rcmd === undefined ? 1 : load_data.rcmd +1);
   if (confirm("이 글을 추천 하시겠습니까?")) {
     fetch(`http://localhost:3000/posts/${index}`, {
       method: "PATCH",
-      body: JSON.stringify({ rcmd: load_data.rcmd + 1 }),
+      body: JSON.stringify({ rcmd: rcmd_t}),
       headers: {
         "Content-Type": "application/json",
       },
