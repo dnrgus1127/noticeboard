@@ -19,6 +19,7 @@ const sliceSelector = document.querySelector("#slicePage");
 sliceSelector.addEventListener("change", () => {
   localStorage.setItem("slicePage", sliceSelector.value);
   location.reload();
+  
 });
 sliceSelector.value = slicePage;
 
@@ -26,7 +27,7 @@ const categorySort = document.querySelector("#categorySort");
 
 categorySort.addEventListener("change", () => {
   localStorage.setItem("categoryValue", categorySort.value);
-  location.reload();
+  location.href ="NoticeBoard.html";
 });
 
 categorySort.value = localStorage.getItem("categoryValue");

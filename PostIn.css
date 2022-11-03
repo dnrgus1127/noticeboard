@@ -174,3 +174,20 @@ h1 {
 .comment-empty p {
   margin: 0 auto;
 }
+
+
+.edit-text {
+  position: absolute; 
+  top:0;
+  left:0;
+  resize: none;
+  display: none;
+  width: 80%;
+}
+
+.relative {
+  position: relative;
+  top:0;
+  left: 0;
+  
+}

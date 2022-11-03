@@ -18,8 +18,14 @@ fetch(`http://localhost:3000/posts/${index}`)
     if (commentArr === undefined || commentArr.length === 0) {
       commentIsEmpty = true;
     }
-    document.getElementById("comments").innerText = `${commentArr.length}`
+    else {
+      document.getElementById("comments").innerText = `${commentArr.length}`
 
+    }
+
+  }).then(()=> {
+
+    renderComments();
   });  
 class Comment {
   /**
@@ -63,7 +69,6 @@ btnWrite.addEventListener("click", () => {
   });
 });
 
-setTimeout(renderComments, 300);
 
 function renderComments() {
 
@@ -84,10 +89,16 @@ function renderComments() {
     <h5 class="comment-writer">${element.author}</h5>
     <p class="comment-time">(${element.time})</p>
   </div>
+  <div class="relative">
   <p class="comment-contents">
-    ${element.content}
+  ${element.content}
   </p>
+  <textarea class="edit-text" >123</textarea>
+  </div>
+  
+  
   <div class="comment-btn">
+    <button class="comment-edit-end" style="display:none">완료</button>
     <button class="comment-edit">수정</button>
     <button class="comment-del">삭제</button>
   </div>`;
@@ -95,6 +106,7 @@ function renderComments() {
   }
   wrapContents.appendChild(fragmentPage);
   addEventDel();
+  addEventEdit();
 }
 
 // 댓글 수정, 삭제
@@ -123,3 +135,39 @@ function addEventDel() {
   }
 }
 
+
+function addEventEdit() {
+   const btnEdit = document.querySelectorAll(".comment-edit");
+   const btnEditEnd = document.querySelectorAll(".comment-edit-end");
+
+   for (let i = 0; i < btnEdit.length; i++) {
+
+    const element = btnEdit[i];
+    const comment = document.querySelectorAll(".comment");
+    const end = btnEditEnd[i];
+    let editText;
+    element.addEventListener("click",()=>{
+      editText = comment[i].querySelector(".edit-text");
+      editText.innerText = `${commentArr[i].content}`
+      editText.style.display = "inherit";
+      end.style.display = "inherit";
+    })
+
+    end.addEventListener("click", ()=>{
+      commentArr[i].content = editText.value;
+      commentArr[i].time = GetDate("min");
+      fetch(`http://localhost:3000/posts/${index}`, {
+        method: "PATCH",
+        body: JSON.stringify({ comments: commentArr }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }).then(() => {
+        location.reload();
+      });
+    })
+
+    
+   }
+
+}
