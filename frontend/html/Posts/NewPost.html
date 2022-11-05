@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>글쓰기</title>
+    <link rel="stylesheet" href="NewPost.css" />
+  </head>
+  <body>
+    <div id="title-page"><h1 id="title-text">글쓰기</h1></div>
+    <div id="input-area">
+      <form action="/index.html" id="form-write" method="post">
+        <label for="title">제목</label>
+        <input type="text" name="title" id="title" placeholder="제목" /> <br />
+        <p id="title_valid" class="valid_warning"></p>
+
+        <label for="author" style="margin-top: 4px">작성자</label>
+        <input
+          type="text"
+          name="author"
+          style="width: 200px"
+          id="author"
+          placeholder="닉네임"
+        />
+        <p id="author-valid" class="valid_warning"></p>
+        <div class="category-box">
+          <label for="category">카테고리</label>
+          <select name="category" id="category" required>
+            <option value="Error" disabled selected>선택안함</option>
+            <option value="공지사항">공지사항</option>
+            <option value="잡담">잡담</option>
+            <option value="토론">토론</option>
+          </select>
+        </div>
+        <div class="content-box">
+          <label for="content">내용</label>
+          <textarea
+            name="post"
+            id="content-area"
+            placeholder="내용 입력.."
+          ></textarea>
+        </div>
+        <div id="container-btn">
+          <button id="btn-submit" class="btn" type="submit" value="쓰기">
+            쓰기
+          </button>
+          <button
+            type="button"
+            class="btn"
+            onclick="location.href = 'NoticeBoard'"
+          >
+            취소
+          </button>
+        </div>
+      </form>
+    </div>
+  </body>
+  <script type="module" src="newpost.js"></script>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>게시판</title>
+    <link rel="stylesheet" href="/notice.css" />
+  </head>
+  <body>
+    <h1 onclick="location.href='/NoticeBoard'">자유 게시판</h1>
+    <div>
+      <div id="noticeBox">
+        <div id="line-top">
+          <div>
+            <select name="slicePage" id="slicePage">
+              <option value="5">5개</option>
+              <option value="10">10개</option>
+              <option value="15">15개</option>
+            </select>
+            <select name="categorySort" id="categorySort">
+              <option value="전체" selected>전체</option>
+              <option value="잡담">잡담</option>
+              <option value="공지사항">공지사항</option>
+              <option value="토론">토론</option>
+            </select>
+          </div>
+          <p id="total-count"></p>
+        </div>
+
+        <table id="noticeTable">
+          <colgroup>
+            <col width="6%" />
+            <col width="60%" />
+            <col width="14%" />
+            <col width="15%" />
+            <col width="5%" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th>번호</th>
+              <th>제목</th>
+              <th>작성자</th>
+              <th>작성일</th>
+              <th>조회수</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+        <div id="btn-write">
+          <button id="btn-newpost">글쓰기</button>
+        </div>
+
+        <ul id="js-pagenation"></ul>
+      </div>
+    </div>
+  </body>
+  <script type="module" src="/NoticeBoard.js"></script>
+</html>
