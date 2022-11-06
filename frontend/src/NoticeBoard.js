@@ -1,9 +1,13 @@
 import { domain_port } from "./Setting.js";
+import { ChangeDate } from "./lib/getDate.js";
 
 const tbody = document.querySelector("tbody");
 let currentPage = getParameterByName("pageIndex");
 
 let slicePage = localStorage.getItem("slicePage");
+
+let author = getParameterByName("author");
+
 if (slicePage == null) {
   slicePage = 5;
 } else {
@@ -35,56 +39,23 @@ categorySort.value = localStorage.getItem("categoryValue");
 
 slicePage = Number(slicePage);
 //게시글 객체 배열 요청
-fetch(`${domain_port}/posts?_sort=id&_order=DESC`)
-  .then((response) => response.json())
-  .then((data) => {
-    data = data.arr;
-    if (categorySort.value !== "전체") {
-      data = data.filter((element) => element.category == categorySort.value);
-    }
-    len = data.length;
-    data = data.slice(
-      (currentPage - 1) * slicePage,
-      (currentPage - 1) * slicePage + slicePage
-    );
 
-    for (let index = 0; index < data.length; index++) {
-      const element = data[index];
-      const arr = [
-        element.id,
-        element.title,
-        element.author,
-        element.date, //date 추가 예정
-        element.views,
-      ];
-      let post = document.createElement("tr");
-      for (let i = 0; i < 5; i++) {
-        const ele = document.createElement("td");
-        ele.innerText = `${arr[i]}`;
-        if (i === 1) {
-          const a = document.createElement("a");
-          const tag = document.createElement("span");
-          tag.style.fontSize = "12px";
-          tag.innerText = `[${element.category}]`;
-          a.href = `/PostIn?index=${arr[0]}`;
-          a.style.display = "flex";
-          a.appendChild(tag);
-          a.appendChild(ele);
-          post.appendChild(a);
-          if (element.category === "공지사항") {
-            tag.style.color = "red";
-          }
-        } else {
-          post.appendChild(ele);
-        }
-      }
-
-      tbody.insertAdjacentElement("beforeend", post);
-    }
-    const Ele_count = document.getElementById("total-count");
-    Ele_count.innerText = `Total  : ${len}`;
-    renderPagination(currentPage, len);
+if (author !== "") {
+  document.getElementById("con-resultInfo").style.display = "inherit";
+  const resultInfo = document.getElementById("text-resultInfo");
+  resultInfo.style.display = "inherit";
+  resultInfo.innerText = `작성자 : '${author}'으로 검색한 결과입니다..`;
+  document.getElementById("authorCancel").addEventListener("click", () => {
+    location.href = "/NoticeBoard";
   });
+  fetch_author(author);
+} else {
+  fetch(`${domain_port}/posts?_sort=id&_order=DESC`)
+    .then((response) => response.json())
+    .then((data) => {
+      load_posts(data);
+    });
+}
 
 /**
  * pageRender
@@ -166,3 +137,84 @@ export function getParameterByName(name) {
 document.getElementById("btn-newpost").addEventListener("click", () => {
   location.href = `NewPost?type=new`;
 });
+
+function fetch_author(author) {
+  fetch(`${domain_port}/posts/author/${author}`, {
+    method: "POST",
+    body: JSON.stringify({ author }),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      load_posts(data);
+    });
+}
+
+function load_posts(data) {
+  data = data.arr;
+  if (categorySort.value !== "전체") {
+    data = data.filter((element) => element.category == categorySort.value);
+  }
+  len = data.length;
+  data = data.slice(
+    (currentPage - 1) * slicePage,
+    (currentPage - 1) * slicePage + slicePage
+  );
+
+  for (let index = 0; index < data.length; index++) {
+    const element = data[index];
+    const arr = [
+      element.id,
+      element.title,
+      element.author,
+      ChangeDate(new Date(element.write_date)), //date 추가 예정
+      element.views,
+    ];
+    let post = document.createElement("tr");
+    for (let i = 0; i < 5; i++) {
+      const ele = document.createElement("td");
+      ele.innerText = `${arr[i]}`;
+      if (i === 1) {
+        const a = document.createElement("a");
+        const tag = document.createElement("span");
+        const cnt_comment = document.createElement("span");
+        cnt_comment.innerText = `[${element.cnt}]`;
+        cnt_comment.style.fontSize = "9px";
+        tag.style.fontSize = "12px";
+        tag.innerText = `[${element.category}]`;
+        a.href = `/PostIn?index=${arr[0]}`;
+        a.style.display = "flex";
+        a.appendChild(tag);
+        a.appendChild(ele);
+        a.appendChild(cnt_comment);
+        post.appendChild(a);
+        if (element.category === "공지사항") {
+          tag.style.color = "red";
+        }
+      } else if (i === 2) {
+        const a = document.createElement("a");
+        a.href = `/NoticeBoard?author=${arr[i]}`;
+        a.innerText = `${arr[i]}`;
+        a.style.cursor = "pointer";
+        a.style.lineHeight = "48px";
+        // a.style.display = "flex";
+        a.style.width = "100%";
+        ele.innerText = ``;
+        ele.appendChild(a);
+        post.appendChild(ele);
+        if (element.author === "관리자") {
+          a.style.color = "red";
+        }
+      } else {
+        post.appendChild(ele);
+      }
+    }
+
+    tbody.insertAdjacentElement("beforeend", post);
+  }
+  const Ele_count = document.getElementById("total-count");
+  Ele_count.innerText = `Total  : ${len}`;
+  renderPagination(currentPage, len);
+}

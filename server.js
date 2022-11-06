@@ -7,6 +7,7 @@ const dir_html = __dirname + "/frontend/html";
 
 app.use(express.static(__dirname + "/frontend/style"));
 app.use(express.static(__dirname + "/frontend/src"));
+app.use(express.static(__dirname + "/frontend/assets/img"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
@@ -20,14 +21,18 @@ app.get("/posts", (req, res) => {
 });
 
 app.post("/posts", (req, res) => {
-  console.log("req.body");
-  console.log(req.body);
   db.insertPost(req.body);
 });
 
 // ID 기반 POST 조회
 app.get("/posts/:index", (req, res) => {
   db.getPostsID(req.params.index, (rows) => {
+    res.json({ arr: rows });
+  });
+});
+
+app.post("/posts/author/:author", (req, res) => {
+  db.getPostsAuthor(req.params.author, (rows) => {
     res.json({ arr: rows });
   });
 });

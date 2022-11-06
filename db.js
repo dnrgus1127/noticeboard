@@ -19,13 +19,19 @@ const connection = mysql.createConnection({
 // }
 
 function getAllPosts(callback) {
-  connection.query(
-    `SELECT * FROM POSTS ORDER BY ID DESC`,
-    (err, rows, fields) => {
-      if (err) throw err;
-      callback(rows);
-    }
-  );
+  const query = `select e.*,ifnull(i.cnt, 0)as cnt from posts e left outer join (select id,count(*) as cnt from comments group by id)i on e.id=i.id order by e.id desc;`;
+  connection.query(query, (err, rows, fields) => {
+    if (err) throw err;
+    callback(rows);
+  });
+}
+
+function getPostsAuthor(author, callback) {
+  const query = `select e.*,ifnull(i.cnt, 0) as cnt from posts e left outer join (select id,count(*) as cnt from comments group by id)i on e.id=i.id where author='${author}' order by e.id desc;`;
+  connection.query(query, (err, rows, fields) => {
+    if (err) throw err;
+    callback(rows);
+  });
 }
 
 function insertPost(body) {
@@ -55,7 +61,7 @@ function addView(id) {
 }
 
 function delPost(id) {
-  connection.query(`DELETE FROM POSTS WHERE ID=${id}`, (err, rows, fields) => {
+  connection.query(`DELETE FROM POSTS WHERE ID=${id} `, (err, rows, fields) => {
     if (err) throw err;
   });
 }
@@ -100,6 +106,7 @@ function editComment(comment_id, body) {
     }
   );
 }
+
 module.exports = {
   getAllPosts,
   insertPost,
@@ -111,4 +118,5 @@ module.exports = {
   delComment,
   addComment,
   editComment,
+  getPostsAuthor,
 };

@@ -6,13 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>게시판</title>
     <link rel="stylesheet" href="/notice.css" />
+    <link rel="stylesheet" href="/global.css" />
   </head>
   <body>
     <h1 onclick="location.href='/NoticeBoard'">자유 게시판</h1>
     <div>
       <div id="noticeBox">
         <div id="line-top">
-          <div>
+          <div class="flex">
             <select name="slicePage" id="slicePage">
               <option value="5">5개</option>
               <option value="10">10개</option>
@@ -24,7 +25,18 @@
               <option value="공지사항">공지사항</option>
               <option value="토론">토론</option>
             </select>
+            <div id="con-resultInfo">
+              <p id="text-resultInfo">
+                '작성자' : '정욱현'으로 검색한 결과입니다.
+              </p>
+              <img
+                src="/iconmonstr-x-mark-9.svg"
+                alt="XBox"
+                id="authorCancel"
+              />
+            </div>
           </div>
+
           <p id="total-count"></p>
         </div>
 
