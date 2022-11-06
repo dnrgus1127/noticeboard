@@ -30,7 +30,6 @@
  - Single Page Application
  - fetch api 대신 axios(node.js fetch상위 호환 패키지)
 
-general forum
 
 ![제목 없음](https://user-images.githubusercontent.com/65962363/200174919-a9e8c1aa-cc2c-440f-bd4f-bfcfa261e12d.png)
 
