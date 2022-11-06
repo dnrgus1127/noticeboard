@@ -45,6 +45,11 @@ app.patch("/posts/views/:index", (req, res) => {
   db.addView(req.params.index);
 });
 
+//추천
+app.patch("/posts/rcmd/:index", (req, res) => {
+  db.addRcmd(req.params.index);
+});
+
 //Post 수정
 app.patch("/posts/edit/:index", (req, res) => {
   db.editPost(req.params.index, req.body);

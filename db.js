@@ -107,6 +107,10 @@ function editComment(comment_id, body) {
   );
 }
 
+function addRcmd(index) {
+  connection.query(`UPDATE POSTS SET rcmd = rcmd+1 WHERE id=${index}`);
+}
+
 module.exports = {
   getAllPosts,
   insertPost,
@@ -119,4 +123,5 @@ module.exports = {
   addComment,
   editComment,
   getPostsAuthor,
+  addRcmd,
 };

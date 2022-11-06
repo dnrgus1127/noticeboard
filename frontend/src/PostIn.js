@@ -88,15 +88,9 @@ function getParameterByName(name) {
 }
 
 document.getElementById("btn-rcmd").addEventListener("click", () => {
-  console.log(load_data.rcmd);
-  let rcmd_t = load_data.rcmd === undefined ? 1 : load_data.rcmd + 1;
   if (confirm("이 글을 추천 하시겠습니까?")) {
-    fetch(`${domain_port}/posts/${index}`, {
+    fetch(`${domain_port}/posts/rcmd/${index}`, {
       method: "PATCH",
-      body: JSON.stringify({ rcmd: rcmd_t }),
-      headers: {
-        "Content-Type": "application/json",
-      },
     }).then(location.reload());
   }
 });
