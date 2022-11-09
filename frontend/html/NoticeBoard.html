@@ -11,6 +11,10 @@
   <body>
     <h1 onclick="location.href='/NoticeBoard'">자유 게시판</h1>
     <div>
+      <div id="container-uesrInfo">
+        <p id="userId"></p>
+        <img src="" alt="" class="userImg" />
+      </div>
       <div id="noticeBox">
         <div id="line-top">
           <div class="flex">
@@ -66,6 +70,9 @@
         <ul id="js-pagenation"></ul>
       </div>
     </div>
+    <form action="/auth/logout" method="post">
+      <button type="submit">로그아웃</button>
+    </form>
   </body>
   <script type="module" src="/NoticeBoard.js"></script>
 </html>

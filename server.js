@@ -1,9 +1,23 @@
+"use strict";
+const mysql = require("mysql");
+
 const express = require(`express`);
 const app = express();
 const port = 8080;
 const db = require("./db");
-
 const dir_html = __dirname + "/frontend/html";
+
+const dataBase2 = mysql.createConnection({
+  host: "localhost",
+  user: "root",
+  password: "root",
+  port: 3306,
+  database: "forum",
+});
+
+// Session - 세션
+const session = require("express-session");
+const MySqlSession = require("express-mysql-session")(session);
 
 app.use(express.static(__dirname + "/frontend/style"));
 app.use(express.static(__dirname + "/frontend/src"));
@@ -11,8 +25,42 @@ app.use(express.static(__dirname + "/frontend/assets/img"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
+const options = {
+  host: "localhost",
+  port: 3306,
+  user: "root",
+  password: "root",
+  database: "forum",
+};
+
+const sessionStore = new MySqlSession(options);
+
+// 세션 세팅
+app.use(
+  session({
+    secret: "catfish",
+    resave: false,
+    saveUninitialized: true,
+    store: sessionStore,
+    cookie: { maxAge: 600000 },
+    rolling: true,
+  })
+);
+
 /*------------------------------------------------*/
 /* 데이터 조회 , 삽입*/
+
+app.use((req, res, next) => {
+  if (
+    req.session.isLogined != true &&
+    req.url !== "/Auth/Login" &&
+    req.url !== "/auth/login_auth"
+  ) {
+    res.redirect("/Auth/Login");
+  } else {
+    next();
+  }
+});
 
 app.get("/posts", (req, res) => {
   db.getAllPosts((rows) => {
@@ -100,6 +148,67 @@ app.get("/NewPost", (req, res) => {
   res.sendFile(dir_html + "/Posts/NewPost.html");
 });
 
+/*------------------------------------------------*/
+
+/*------------------------------------------------*/
+//로그인 페이지 구현
+
+app.get("/Auth/Login", (req, res) => {
+  res.sendFile(dir_html + "/Auth/Login.html");
+});
+
+app.post("/auth/login_auth", (req, res) => {
+  const post = req.body;
+  dataBase2.query(
+    `select id, password, user_id, user_name from user where id='${post.id}'`,
+    [post.id, post.password],
+    (err, result) => {
+      if (err) throw err;
+      if (result[0] !== undefined) {
+        console.log(post.id);
+        console.log(post.password);
+        console.log(result[0]);
+        if (post.id == result[0].id && post.password == result[0].password) {
+          console.log(result[0]);
+          console.log(req.session);
+          req.session.uid = result[0].id;
+          req.session.author_id = result[0].author_id;
+          req.session.isLogined = true;
+          req.session.name = result[0].user_name;
+          console.log("비밀번호 맞음!");
+
+          req.session.save(() => {
+            res.redirect(`/NoticeBoard?user=${req.session.uid}`);
+          });
+        } else {
+          console.log("비밀번호 틀림!");
+        }
+      } else {
+        console.log("아이디가 없습니다.");
+        res.writeHead(200, { "Content-Type": "text/html;charset=UTF-8" });
+        res.write("<script>alert('아이디가 없습니다.')</script>");
+        res.write('<script>window.location="/Auth/Login"</script>');
+      }
+    }
+  );
+});
+
+app.post("/auth/logout", (req, res) => {
+  delete req.session.uid;
+  delete req.session.isLogined;
+  delete req.session.author_id;
+  delete req.session.user_name;
+
+  req.session.save(function () {
+    res.redirect("/Auth/Login");
+  });
+});
+/*------------------------------------------------*/
+//User data
+app.get("/fetch/user", (req, res) => {
+  console.log(req.session.name);
+  res.json(req.session.name);
+});
 /*------------------------------------------------*/
 
 app.listen(port, () => {

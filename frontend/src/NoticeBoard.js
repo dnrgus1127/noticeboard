@@ -1,5 +1,6 @@
 import { domain_port } from "./Setting.js";
 import { ChangeDate } from "./lib/getDate.js";
+import { getUser } from "./fetch/fetch.js";
 
 const tbody = document.querySelector("tbody");
 let currentPage = getParameterByName("pageIndex");
@@ -218,3 +219,12 @@ function load_posts(data) {
   Ele_count.innerText = `Total  : ${len}`;
   renderPagination(currentPage, len);
 }
+
+/*------------------------------- */
+getUser()
+  .then((res) => res.json())
+  .then((data) => {
+    document.getElementById("userId").innerHTML = `${data}님 환영합니다.`;
+  });
+
+/*------------------------------- */

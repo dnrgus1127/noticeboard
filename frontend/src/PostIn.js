@@ -65,10 +65,6 @@ btnDelete.addEventListener("click", () => {
   }
 });
 
-// const textarea = document.getElementById("ir1");
-
-// console.log(textarea.value);
-
 document.getElementById("btn-back").addEventListener("click", () => {
   const pageIndex = localStorage.getItem("pageIndex");
   location.href = `../NoticeBoard?pageIndex=${pageIndex}`;
