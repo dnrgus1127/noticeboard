@@ -111,6 +111,14 @@ function addRcmd(index) {
   connection.query(`UPDATE POSTS SET rcmd = rcmd+1 WHERE id=${index}`);
 }
 
+function searchTitle(search, callback) {
+  const query = `SELECT * FROM POSTSC WHERE TITLE LIKE '%${search}%'`;
+  connection.query(query, (err, rows, fields) => {
+    if (err) throw err;
+    callback(rows);
+  });
+}
+
 module.exports = {
   getAllPosts,
   insertPost,
@@ -124,4 +132,5 @@ module.exports = {
   editComment,
   getPostsAuthor,
   addRcmd,
+  searchTitle,
 };

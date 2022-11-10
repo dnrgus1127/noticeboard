@@ -169,5 +169,47 @@ tr:hover {
   cursor: pointer;
 }
 
-#container-userInfo {
+#container-uesrInfo {
+  display: flex;
+  justify-content: end;
+  margin-bottom: 40px;
+}
+
+#wrap-userInfo {
+  padding: 0 8px;
+}
+#userId {
+  font-size: 18px;
+  font-weight: 600;
+  margin-right: 12px;
+}
+
+#container-userBtn {
+  color: grey;
+  height: 16px;
+  justify-content: end;
+}
+
+#container-userBtn button:hover {
+  border-bottom: 1px solid grey;
+}
+
+#container-userBtn button {
+  border: none;
+  outline: none;
+  color: grey;
+  background: none;
+  font-size: 10px;
+  display: block;
+  cursor: pointer;
+}
+
+#searchBar {
+  width: 100%;
+  text-align: center;
+  padding-top: 30px;
+}
+
+#wrap-searchBar {
+  display: inline-block;
 }

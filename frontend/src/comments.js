@@ -2,8 +2,15 @@ import { GetDate } from "/lib/getDate.js";
 import { getParameterByName } from "/lib/param.js";
 import { domain_port } from "./Setting.js";
 import { ChangeDate } from "./lib/getDate.js";
+import { getUser } from "./fetch/fetch.js";
 
 const commentAuthor = document.getElementById("comment-author");
+
+getUser()
+  .then((res) => res.json())
+  .then((data) => {
+    commentAuthor.value = data;
+  });
 const commentContent = document.getElementById("comment-content");
 const btnWrite = document.getElementById("btn-write");
 const index = getParameterByName("index");

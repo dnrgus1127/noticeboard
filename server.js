@@ -134,7 +134,7 @@ app.patch("/posts/comment/edit/:comment_id", (req, res) => {
 /*------------------------------------------------*/
 
 app.get("/NoticeBoard", (req, res) => {
-  res.sendFile(dir_html + "/NoticeBoard.html");
+  res.sendFile(dir_html + "/NoticeBoard.html", { serverdata: 12 });
 });
 
 app.get("/PostIn", (req, res) => {
@@ -178,7 +178,7 @@ app.post("/auth/login_auth", (req, res) => {
           console.log("비밀번호 맞음!");
 
           req.session.save(() => {
-            res.redirect(`/NoticeBoard?user=${req.session.uid}`);
+            res.redirect(`/NoticeBoard`);
           });
         } else {
           console.log("비밀번호 틀림!");
@@ -206,8 +206,13 @@ app.post("/auth/logout", (req, res) => {
 /*------------------------------------------------*/
 //User data
 app.get("/fetch/user", (req, res) => {
-  console.log(req.session.name);
   res.json(req.session.name);
+});
+
+app.get("/fetch/title/:title", (req, res) => {
+  db.searchTitle(req.params.title, (rows) => {
+    res.json({ arr: rows });
+  });
 });
 /*------------------------------------------------*/
 

@@ -12,7 +12,14 @@
     <div id="input-area">
       <form action="/index.html" id="form-write" method="post">
         <label for="title">제목</label>
-        <input type="text" name="title" id="title" placeholder="제목" /> <br />
+        <input
+          type="text"
+          name="title"
+          id="title"
+          placeholder="제목"
+          class="newPost"
+        />
+        <br />
         <p id="title_valid" class="valid_warning"></p>
 
         <label for="author" style="margin-top: 4px">작성자</label>
@@ -22,6 +29,8 @@
           style="width: 200px"
           id="author"
           placeholder="닉네임"
+          disabled
+          class="newPost"
         />
         <p id="author-valid" class="valid_warning"></p>
         <div class="category-box">

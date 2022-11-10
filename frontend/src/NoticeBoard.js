@@ -58,6 +58,19 @@ if (author !== "") {
     });
 }
 
+const searchBox = document.getElementById("wrap-searchBar");
+searchBox.addEventListener("submit", (evt) => {
+  const search = document.getElementById("search").value;
+  console.log(search);
+  evt.preventDefault();
+  fetch(`${domain_port}/fetch/title/${search}`)
+    .then((res) => res.json())
+    .then((data) => {
+      console.log(data.arr);
+      load_posts(data);
+    });
+});
+
 /**
  * pageRender
  * @param {integer} currentPage
@@ -122,8 +135,9 @@ function renderPagination(currentPage, total) {
     fragmentPage.appendChild(endli);
     fragmentPage.appendChild(allendli);
   }
-
-  document.getElementById("js-pagenation").appendChild(fragmentPage);
+  const pagenation = document.getElementById("js-pagenation");
+  pagenation.innerHTML = "";
+  pagenation.appendChild(fragmentPage);
 }
 
 export function getParameterByName(name) {
@@ -154,6 +168,7 @@ function fetch_author(author) {
 }
 
 function load_posts(data) {
+  tbody.innerHTML = "";
   data = data.arr;
   if (categorySort.value !== "전체") {
     data = data.filter((element) => element.category == categorySort.value);
@@ -224,7 +239,7 @@ function load_posts(data) {
 getUser()
   .then((res) => res.json())
   .then((data) => {
-    document.getElementById("userId").innerHTML = `${data}님 환영합니다.`;
+    document.getElementById("userId").innerHTML = `${data}님`;
   });
 
 /*------------------------------- */

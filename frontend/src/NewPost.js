@@ -2,20 +2,9 @@ import { getParameterByName } from "/lib/param.js";
 import { GetDate } from "/lib/getDate.js";
 import { domain_port } from "/Setting.js";
 import { Post } from "./Post.js";
+import { getUser } from "./fetch/fetch.js";
+import { Valid_author, ValidData, Valid_title } from "./lib/valid.js";
 
-// class Post {
-//   constructor(title, author, category, post, views, date) {
-//     this.title = title;
-//     this.author = author;
-//     this.category = category;
-//     this.post = post;
-//     this.views = views;
-//     this.date = date;
-//   }
-// }
-
-//현재 시간
-// const date_now = `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}`;
 const date_now = GetDate();
 
 // 수정 처리 스크립트
@@ -24,12 +13,19 @@ const index = getParameterByName("index");
 
 let postData;
 
+getUser()
+  .then((res) => res.json())
+  .then((data) => {
+    document.getElementById("author").value = data;
+  });
+
 // 수정 처리 일 경우만
 if (type == 1) {
   const ele_title = document.getElementById("title");
-  title.setAttribute("disabled", "");
   const ele_author = document.getElementById("author");
-  author.setAttribute("disabled", "");
+  const newPosts = document.querySelectorAll(".newPost");
+  newPosts.forEach((ele) => ele.setAttribute("disabled", ""));
+
   const ele_post = document.getElementById("content-area");
   const ele_category = document.getElementById("category");
   fetch(`${domain_port}/posts/${index}`)
@@ -62,20 +58,6 @@ if (type == 1) {
       location.href = `./PostIn?index=${index}`;
     }, 500);
   });
-}
-
-function ValidData(post) {
-  let checkError =
-    !Valid_title(post.title) ||
-    !Valid_author(post.author) ||
-    post.category === "Error";
-
-  if (checkError) {
-    alert("입력값을 다시 확인해 주세요!");
-    return true;
-  } else {
-    return false;
-  }
 }
 
 // 유효성 검사 처리
@@ -135,57 +117,6 @@ for (let index = 0; index < inputs.length; index++) {
       evt.preventDefault();
     }
   });
-}
-
-/**
- * 제목 유효성 검사 함수
- * @param {*} value
- * @returns
- */
-function Valid_title(value) {
-  const title = value;
-  const scriptTag = /[~^&|<>?]/; //스크립트 정규표현식
-  let valid_text = "";
-  let flag = false;
-
-  if (title.length === 0) {
-    valid_text = "제목은 비워둘 수 없습니다.";
-  } else if (scriptTag.test(title) == true) {
-    valid_text = "스크립트 태그는 사용할 수 없습니다.";
-  } else if (title.length > 20) {
-    valid_text = "제목은 20자 이내로 작성해주세요.";
-  } else {
-    flag = true;
-  }
-
-  document.getElementById("title_valid").innerText = valid_text;
-  return flag;
-}
-
-/**
- * 작성자 이름 유효성 검사 함수
- * @param {string} author
- * @returns
- */
-function Valid_author(value) {
-  const author = value;
-  const scriptTag = /[~^&()|<>?]/; //스크립트 정규표현식
-  const checkText = /\s/g;
-  let valid_text = "";
-  let flag = false;
-
-  if (author.length === 0) {
-    valid_text = "작성자를 입력하세요.";
-  } else if (scriptTag.test(author) == true) {
-    valid_text = "스크립트 태그는 사용할 수 없습니다.";
-  } else if (author.match(checkText)) {
-    valid_text = "공백이 존재합니다.";
-  } else {
-    flag = true;
-  }
-
-  document.getElementById("author-valid").innerText = valid_text;
-  return flag;
 }
 
 //style

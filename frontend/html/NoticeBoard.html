@@ -11,11 +11,20 @@
   <body>
     <h1 onclick="location.href='/NoticeBoard'">자유 게시판</h1>
     <div>
-      <div id="container-uesrInfo">
-        <p id="userId"></p>
-        <img src="" alt="" class="userImg" />
-      </div>
       <div id="noticeBox">
+        <div id="container-uesrInfo">
+          <div id="wrap-userInfo">
+            <div class="flex">
+              <p id="userId"></p>
+              <img src="/user_icon.svg" alt="" class="userImg" />
+            </div>
+            <div id="container-userBtn" class="flex">
+              <form action="/auth/logout" method="post">
+                <button type="submit">로그아웃</button>
+              </form>
+            </div>
+          </div>
+        </div>
         <div id="line-top">
           <div class="flex">
             <select name="slicePage" id="slicePage">
@@ -68,11 +77,23 @@
         </div>
 
         <ul id="js-pagenation"></ul>
+        <div id="searchBar">
+          <!-- TODO 검색어 처리 -->
+          <form action="" id="wrap-searchBar">
+            <select name="태그" id="searchTag">
+              <option value="제목">제목</option>
+              <option value="작성자">작성자</option>
+            </select>
+            <input
+              type="text"
+              placeholder="검색어를 입력하세요.."
+              id="search"
+            />
+            <button type="submit" hidden>버튼</button>
+          </form>
+        </div>
       </div>
     </div>
-    <form action="/auth/logout" method="post">
-      <button type="submit">로그아웃</button>
-    </form>
   </body>
   <script type="module" src="/NoticeBoard.js"></script>
 </html>
