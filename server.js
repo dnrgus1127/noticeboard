@@ -54,7 +54,9 @@ app.use((req, res, next) => {
   if (
     req.session.isLogined != true &&
     req.url !== "/Auth/Login" &&
-    req.url !== "/auth/login_auth"
+    req.url !== "/auth/login_auth" &&
+    req.url !== "/auth/sign" &&
+    req.url !== "/auth/sign/newAccount"
   ) {
     res.redirect("/Auth/Login");
   } else {
@@ -223,7 +225,16 @@ app.get("/search/author/:author", (req, res) => {
   });
 });
 
-/*------------------------------------------------*/
+/*------------------------------------------------회원 가입*/
+app.get("/auth/sign", (req, res) => {
+  res.sendFile(dir_html + "/auth/sign.html");
+});
+
+app.post("/auth/sign/newAccount", (req, res) => {
+  db.addUser(req.body, (text) => {
+    res.json({ err: text });
+  });
+});
 
 app.listen(port, () => {
   console.log(`서버가 실행됩니다. http://localhost:${port}`);

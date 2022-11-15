@@ -72,6 +72,7 @@ searchBox.addEventListener("submit", (evt) => {
       });
   } else if (searchOption == "작성자") {
     console.log(searchOption);
+
     fetch(`${domain_port}/search/author/${search}`)
       .then((res) => res.json())
       .then((data) => {

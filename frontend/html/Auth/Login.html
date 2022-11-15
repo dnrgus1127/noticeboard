@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -26,6 +26,14 @@
             <button type="submit" id="btn-login">로그인</button>
           </div>
         </form>
+        <div>
+          <button class="sign">회원가입</button>
+          <script>
+            document.querySelector(".sign").addEventListener("click", () => {
+              location.href = "/auth/sign";
+            });
+          </script>
+        </div>
       </div>
     </div>
   </body>

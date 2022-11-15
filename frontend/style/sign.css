@@ -1,0 +1,115 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap");
+
+* {
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background-color: rgba(232, 166, 166, 0.3);
+}
+
+#wrap-container {
+  max-width: 960px;
+  margin: 0 auto;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.7);
+  height: 100vh;
+  position: relative;
+  padding: 200px 120px;
+}
+
+#wrap-container::before {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  content: "";
+  background-image: url("/background-sign.jpg");
+  background-size: cover;
+  opacity: 0.7;
+  z-index: -1;
+}
+
+#wrap-container h1 {
+  color: rgb(255, 255, 255);
+  position: relative;
+  display: inline;
+}
+
+#wrap-container h1::after {
+  position: absolute;
+  content: "";
+  height: 3px;
+  left: 0px;
+  bottom: -10px;
+  margin: 4px 0 0;
+  background-color: rgb(232, 166, 166);
+  width: 100%;
+}
+
+form {
+  margin-top: 40px;
+}
+
+form p {
+  color: white;
+  margin-top: 16px;
+  margin-left: 16px;
+  font-size: 18px;
+  margin-bottom: 4px;
+}
+input {
+  background-color: rgba(185, 185, 185, 0.7);
+  border: none;
+  outline: none;
+  border-radius: 18px;
+  padding: 4px 16px;
+  height: 36px;
+  width: 100%;
+  font-size: 16px;
+  color: black;
+  font-family: "Noto Sans KR", sans-serif;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.7);
+}
+
+.btn-SignUp {
+  border-radius: 20px;
+  border: 1px solid grey;
+  background-color: rgb(232, 166, 166);
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 8px 33px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: transform 80ms ease-in;
+  display: block;
+  margin: 0 auto;
+  width: 240px;
+  margin-top: 150px;
+  border: none;
+}
+
+button:active {
+  transform: scale(0.95);
+}
+
+button:focus {
+  outline: none;
+}
+
+.help-sign {
+  margin-top: 40px;
+  text-align: center;
+}
+.wrap-help {
+  margin-top: 60px;
+}
+
+.valid p:nth-child(2) {
+  color: red;
+  font-size: 12px;
+  line-height: 1.7rem;
+  font-weight: 700;
+}

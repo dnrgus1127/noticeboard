@@ -127,6 +127,22 @@ function searchAuthor(search, callback) {
   });
 }
 
+function addUser(body, callback) {
+  if (body.email == "") {
+    body.email = null;
+  }
+  const query = `INSERT INTO USER (ID,PASSWORD,USER_NAME,CREATE_DATE,EMAIL) VALUES ('${body.id}','${body.password}','${body.user_name}','${body.create_date}','${body.email}');`;
+  connection.query(query, (err) => {
+    if (err) {
+      if (err.errno === 1062) {
+        callback("이미 존재하는 아이디입니다!");
+      }
+    } else {
+      callback("아이디 생성 완료!");
+    }
+  });
+}
+
 module.exports = {
   searchAuthor,
   getAllPosts,
@@ -142,4 +158,5 @@ module.exports = {
   getPostsAuthor,
   addRcmd,
   searchTitle,
+  addUser,
 };
