@@ -61,14 +61,24 @@ if (author !== "") {
 const searchBox = document.getElementById("wrap-searchBar");
 searchBox.addEventListener("submit", (evt) => {
   const search = document.getElementById("search").value;
-  console.log(search);
+  const searchOption = document.getElementById("searchOption").value;
   evt.preventDefault();
-  fetch(`${domain_port}/fetch/title/${search}`)
-    .then((res) => res.json())
-    .then((data) => {
-      console.log(data.arr);
-      load_posts(data);
-    });
+  if (searchOption == "제목") {
+    fetch(`${domain_port}/fetch/title/${search}`)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data.arr);
+        load_posts(data);
+      });
+  } else if (searchOption == "작성자") {
+    console.log(searchOption);
+    fetch(`${domain_port}/search/author/${search}`)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data.arr);
+        load_posts(data);
+      });
+  }
 });
 
 /**

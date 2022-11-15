@@ -209,11 +209,20 @@ app.get("/fetch/user", (req, res) => {
   res.json(req.session.name);
 });
 
+/*------------------------------------------------게시글 검색 */
+
 app.get("/fetch/title/:title", (req, res) => {
   db.searchTitle(req.params.title, (rows) => {
     res.json({ arr: rows });
   });
 });
+
+app.get("/search/author/:author", (req, res) => {
+  db.searchAuthor(req.params.author, (rows) => {
+    res.json({ arr: rows });
+  });
+});
+
 /*------------------------------------------------*/
 
 app.listen(port, () => {

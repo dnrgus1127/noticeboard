@@ -119,7 +119,16 @@ function searchTitle(search, callback) {
   });
 }
 
+function searchAuthor(search, callback) {
+  const query = `select * from postsc where author like '%${search}%'; `;
+  connection.query(query, (err, rows, fields) => {
+    if (err) throw err;
+    callback(rows);
+  });
+}
+
 module.exports = {
+  searchAuthor,
   getAllPosts,
   insertPost,
   getPostsID,

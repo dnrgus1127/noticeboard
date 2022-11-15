@@ -211,5 +211,12 @@ tr:hover {
 }
 
 #wrap-searchBar {
+  width: 100%;
   display: inline-block;
+  height: 48px;
+}
+
+#wrap-searchBar input {
+  width: 80%;
+  padding-left: 4px;
 }
