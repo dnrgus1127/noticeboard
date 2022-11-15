@@ -39,7 +39,7 @@
 - fetch api 대신 axios(node.js fetch상위 호환 패키지)
   ![로그인 호마ㅕㄴ](https://user-images.githubusercontent.com/65962363/200895394-301a3b3e-268e-4449-aefb-4d47b28bc028.png)
 
-![제목 없음](https://user-images.githubusercontent.com/65962363/200174919-a9e8c1aa-cc2c-440f-bd4f-bfcfa261e12d.png)
+![메인 화면](https://user-images.githubusercontent.com/65962363/201858697-1239e5a0-481e-4b50-baaf-b3b475f940ed.png)
 
 2022-11-05
 
