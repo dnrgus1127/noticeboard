@@ -42,6 +42,8 @@
 
 ![메인 화면](https://user-images.githubusercontent.com/65962363/201858697-1239e5a0-481e-4b50-baaf-b3b475f940ed.png)
 ![게시글](https://user-images.githubusercontent.com/65962363/201859113-e94a5ac4-b57f-4c29-9bf7-0125a6ba1dfa.png)
+-회원 가입 페이지 
+![회원 가입 화면](https://user-images.githubusercontent.com/65962363/201969897-08da7a9a-638b-4923-bbda-1e8ffc9e5a04.png)
 
 2022-11-05
 
