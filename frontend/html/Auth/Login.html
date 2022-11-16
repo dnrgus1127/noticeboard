@@ -10,29 +10,39 @@
   </head>
   <body>
     <div id="con-main">
-      <div id="logo">
-        <img src="/html5-logo-31816.png" alt="html" id="img-logo" />
-      </div>
-      <div id="con-login">
-        <form method="post" action="/auth/login_auth" id="form-login">
-          <div id="con-input">
-            <input type="text" name="id" id="id" placeholder="ID" /><br />
-            <input
-              type="password"
-              name="password"
-              id="password"
-              placeholder="PW"
-            />
-            <button type="submit" id="btn-login">로그인</button>
+      <div id="wrap-main">
+        <div id="logo">
+          <img src="/html5-logo-31816.png" alt="html" id="img-logo" />
+        </div>
+        <div id="con-login">
+          <form method="post" action="/auth/login_auth" id="form-login">
+            <div id="con-input">
+              <input type="text" name="id" id="id" placeholder="ID" /><br />
+              <input
+                type="password"
+                name="password"
+                id="password"
+                placeholder="PW"
+              />
+              <button type="submit" id="btn-login">로그인</button>
+            </div>
+          </form>
+          <div>
+            <button class="sign">회원가입</button>
+            <script>
+              document.querySelector(".sign").addEventListener("click", () => {
+                location.href = "/auth/sign";
+              });
+            </script>
           </div>
-        </form>
-        <div>
-          <button class="sign">회원가입</button>
-          <script>
-            document.querySelector(".sign").addEventListener("click", () => {
-              location.href = "/auth/sign";
-            });
-          </script>
+          <div class="help-text">
+            <p id="help-account" class="help-sign" style="color: white">
+              If you have any questions about your account, E-mail By
+              <span style="color: rgb(232, 166, 166)"
+                >dnrgus1127@naver.com</span
+              >
+            </p>
+          </div>
         </div>
       </div>
     </div>

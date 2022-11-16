@@ -2,11 +2,35 @@
 
 body {
   font-family: "Montserrat", sans-serif;
+  background-color: rgba(232, 166, 166, 0.3);
 }
 
 #con-main {
   width: 100%;
-  padding-top: 120px;
+}
+
+#wrap-main {
+  max-width: 960px;
+  margin: 0 auto;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.7);
+  height: 100vh;
+  position: relative;
+  padding: 100px 120px;
+}
+
+#wrap-main::before {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  content: "";
+  /* background-image: url("/avenue-gbf293cba4_1920.jpg"); */
+  background-image: url("/background-sign.jpg");
+
+  background-size: cover;
+  opacity: 0.7;
+  z-index: -1;
 }
 
 #logo {
@@ -21,7 +45,7 @@ body {
 }
 
 #con-login input {
-  width: 240px;
+  width: 100%;
   border: none;
   background-color: #eee;
   padding: 12px 15px;
@@ -29,7 +53,7 @@ body {
 }
 
 #con-login {
-  margin-top: 120px;
+  margin-top: 180px;
   width: 100%;
 }
 
@@ -37,14 +61,17 @@ body {
   width: 100%;
 }
 #con-input {
-  width: 240px;
+  width: 360px;
   margin: 0 auto;
+}
+#btn-login {
+  margin-top: 80px;
 }
 
 button {
   border-radius: 20px;
   border: 1px solid grey;
-  background-color: grey;
+  background-color: rgb(232, 166, 166);
   color: #ffffff;
   font-size: 12px;
   font-weight: bold;
@@ -57,6 +84,7 @@ button {
   width: 140px;
   margin-top: 25px;
   border: none;
+  width: 240px;
 }
 
 button:active {
@@ -75,4 +103,22 @@ button.ghost {
 .sign {
   background-color: #c8c8c8;
   border: none;
+}
+
+.help-text {
+  text-align: center;
+  margin-top: 80px;
+}
+
+input {
+  background-color: rgba(185, 185, 185, 0.7);
+  border: none;
+  outline: none;
+  border-radius: 18px;
+  padding: 4px 16px;
+  height: 36px;
+  font-size: 16px;
+  color: black;
+  font-family: "Noto Sans KR", sans-serif;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.7);
 }
